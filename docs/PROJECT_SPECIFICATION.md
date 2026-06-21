@@ -121,66 +121,66 @@ O sistema não substitui recrutadores humanos.
 
 # Arquitetura
 
-Será utilizada Clean Architecture.
+Será utilizada uma estrutura limpa e modular adaptada ao Next.js, mantendo a separação de responsabilidades e facilitando a troca de provedores.
 
-Camadas:
+Camadas sugeridas:
 
-- API
-- Application
-- Domain
-- Infrastructure
+- **Presentation & API (app)**: Páginas, componentes React e Route Handlers (API).
+- **Core / Business Logic (application)**: Casos de uso e regras de negócio da aplicação.
+- **Domain**: Interfaces, contratos e entidades de domínio.
+- **Infrastructure**: Adaptadores para serviços externos (IA Providers, banco de dados com Prisma/Drizzle).
 
 Princípios:
 
 - SOLID
 - Clean Code
-- Separation of Concerns
-- Dependency Injection
+- Separation of Concerns (Separação de Conceitos)
+- Dependency Inversion (Inversão de Dependência)
 
 ---
 
 # Stack Tecnológica
 
-## Backend
+## Backend & API
 
-- ASP.NET Core
-- C#
-- Entity Framework Core
+- Next.js Route Handlers (APIs Serverless)
+- TypeScript
 
 ## Banco de Dados
 
-- PostgreSQL
+- PostgreSQL (Hospedagem gratuita via Supabase ou Neon)
+- Prisma ou Drizzle ORM
 
 ## Frontend
 
-- Next.js
+- Next.js (App Router)
 - TypeScript
 - TailwindCSS
 
 ## IA
 
-- OpenAI
+- Gemini API (Google AI) - Provedor padrão para V1 (camada gratuita e de baixo custo)
+- OpenAI API - Suporte via abstração
 
 ## Containers
 
-- Docker
-- Docker Compose
+- Docker / Docker Compose (Para ambiente local opcional)
 
 ---
 
 # Integrações Externas
 
-## OpenAI
+## Provedor de IA (Gemini / OpenAI)
 
-Responsável pela análise do currículo.
+Responsável pela análise semântica e geração de feedback do currículo.
 
-A integração será realizada através de abstração utilizando interface.
+A integração será realizada através de abstração utilizando interface para permitir troca entre os provedores.
 
 Exemplo:
 
 IAProvider
+├── GeminiProvider (Padrão na V1)
 ├── OpenAIProvider
-├── GeminiProvider
 └── OllamaProvider
 
 ---

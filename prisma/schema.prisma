@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Analysis {
+  id            String   @id @default(uuid())
+  createdAt     DateTime @default(now())
+  candidateName String?
+  score         Int
+  resumeText    String   @db.Text
+  result        Json     // Armazena pontos fortes, pontos de melhoria, sugestões
+  ipHash        String?  // Para limitar abuso de requests do mesmo IP
+}
